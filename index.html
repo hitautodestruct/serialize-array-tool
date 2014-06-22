@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="serializer">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP Serialize Array</title>
+    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script src="js/serialize.js"></script>
+    <script src="js/unserialize.js"></script>
+    
+</head>
+<body>
+    
+    <div class="container" ng-controller="MainCtrl">
+        
+        <div class="row">
+            
+            <div class="col-sm-6">
+                <textarea name="sa-input" id="sa-input" cols="30" rows="10" ng-model="holder.sainput" ng-change="spew()"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <textarea name="sa-output" id="sa-input" cols="30" rows="10"  ng-model="holder.saoutput"></textarea>   
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <script>
+    
+        var serializer = angular.module('serializer',[]);
+        
+        serializer.controller('MainCtrl', ['$scope', function($scope){
+        
+            $scope.holder = {};
+            
+            $scope.spew = function(){
+            
+                var out = unserialize( $scope.holder.sainput );
+                
+                $scope.holder.saoutput =  JSON.parse(out) ;
+                
+            };
+            
+        }]);
+        
+    </script>
+    
+</body>
+</html>
